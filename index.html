@@ -202,7 +202,7 @@ body{
 }
 .send-btn{
     position:relative;
-    width:17%;
+    width:80%;
     padding:15px;
     border:none;
     border-radius:12px;
@@ -241,6 +241,179 @@ body{
     background:#0ea5e9;
     cursor:not-allowed;
     opacity:0.7;
+}
+.hero{
+    position:relative;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:#38bdf8;
+    filter:blur(120px);
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    opacity:0.2;
+    z-index:-1;
+}
+/* MOBILE NAVBAR */
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        align-items:center;
+        padding:15px;
+    }
+
+    nav div{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        margin-top:10px;
+    }
+
+    nav a{
+        margin:0;
+    }
+
+    .cv-dropdown{
+        width:100%;
+        text-align:center;
+    }
+
+    .cv-dropdown button{
+        width:90%;
+    }
+}
+
+/* HERO MOBILE FIX */
+@media(max-width:768px){
+    .hero{
+        padding:80px 15px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .profile{
+        width:150px;
+        height:150px;
+    }
+
+    .btns{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .btn{
+        width:80%;
+        text-align:center;
+    }
+}
+
+/* CONTACT MOBILE */
+@media(max-width:768px){
+    .contact{
+        padding:40px 20px;
+    }
+
+    .send-btn{
+        width:100%;
+        font-size:16px;
+    }
+}
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+/* CARD */
+.project{
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    transform:perspective(1000px) rotateX(0) rotateY(0);
+    transition:0.5s;
+}
+
+/* IMAGE */
+.project img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+/* OVERLAY */
+.project-content{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    padding:20px;
+    background:linear-gradient(transparent, rgba(0,0,0,0.95));
+    transform:translateY(100%);
+    transition:0.5s;
+}
+
+.slider{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+}
+
+.projects-container{
+    display:flex;
+    gap:20px;
+    transition:0.5s;
+    scroll-behavior:smooth;
+    overflow-x:auto;
+}
+
+/* hide scroll bar */
+.projects-container::-webkit-scrollbar{
+    display:none;
+}
+
+.project{
+    min-width:300px;
+    flex-shrink:0;
+    border-radius:20px;
+    overflow:hidden;
+    background:#1e293b;
+}
+
+.project img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+/* arrows */
+.arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:#38bdf8;
+    border:none;
+    padding:10px 15px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:10;
+}
+
+.left{ left:10px; }
+.right{ right:10px; }
+
+.arrow:hover{
+    background:white;
 }
 </style>
 </head>
@@ -307,12 +480,49 @@ body{
 
 <section id="projects" class="hidden">
     <h2>Projects</h2>
-        <div class="project">
-            <h3>Portfolio</h3>
-            <p>Site personnel moderne</p>
-            <p>Build Apps Android</p>
-            <p>Build apps & systeme pc windows</p>
+
+    <div class="slider">
+
+        <button class="arrow left" onclick="slideLeft()">❮</button>
+
+        <div class="projects-container" id="slider">
+
+            <div class="project">
+                <img src="hotel1.jpeg">
+            </div>
+
+            <div class="project">
+                <img src="hotel2.jpeg">
+            </div>
+
+            <div class="project">
+                <img src="hotel3.jpeg">
+            </div>
+
+            <div class="project">
+                <img src="game farme.jpeg">
+            </div>
+
+             <div class="project">
+                <img src="game farme1.jpeg">
+            </div>
+
+             <div class="project">
+                <img src="system comptable.jpeg">
+            </div>
+
+            <div class="project">
+                <img src="qur2an.jpeg">
+            </div>
+
+            <div class="project">
+                <img src="qur2ann.jpeg">
+            </div>
+
         </div>
+
+        <button class="arrow right" onclick="slideRight()">❯</button>
+
     </div>
 </section>
 
@@ -329,6 +539,16 @@ body{
 <div style="position:fixed;bottom:10px;right:10px;opacity:0.3;">
     © Badre Amr
 </div>
+<div id="protect"></div>
+
+<style>
+#protect{
+    position:fixed;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+}
+</style>
 <script>
 // SCROLL ANIMATION
 const observer = new IntersectionObserver(entries=>{
@@ -397,13 +617,17 @@ function sendEmail(){
         message: document.getElementById("message").value
     };
 
-    // تحقق من الفراغ
     if(!params.name || !params.email || !params.message){
         alert("Remplis tous les champs ⚠️");
         return;
     }
 
-    // loading state
+    if(params.message.length < 5){
+        alert("Message trop court ⚠️");
+        return;
+    }
+
+    // LOADING
     btn.classList.add("loading");
     text.innerHTML = "Envoi... ⏳";
 
@@ -412,23 +636,15 @@ function sendEmail(){
         text.innerHTML = "Envoyé ✅";
         btn.style.background = "#22c55e";
 
-        // reset بعد 3 ثواني
         setTimeout(()=>{
             text.innerHTML = "Envoyer";
             btn.classList.remove("loading");
             btn.style.background = "";
-        },3000);
-
+        },2000);
     })
     .catch(()=>{
         text.innerHTML = "Erreur ❌";
-        btn.style.background = "red";
-
-        setTimeout(()=>{
-            text.innerHTML = "Envoyer";
-            btn.classList.remove("loading");
-            btn.style.background = "";
-        },3000);
+        btn.style.background = "#ef4444";
     });
 }
 
@@ -443,6 +659,36 @@ window.onclick = function(e){
         document.getElementById("cvMenu").style.display = "none";
     }
 }
+
+document.querySelectorAll(".project").forEach(card=>{
+    card.addEventListener("mousemove",(e)=>{
+        let x = e.offsetX;
+        let y = e.offsetY;
+
+        let rotateY = (x / card.offsetWidth - 0.5) * 20;
+        let rotateX = (y / card.offsetHeight - 0.5) * -20;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener("mouseleave",()=>{
+        card.style.transform = "perspective(1000px) rotateX(0) rotateY(0)";
+    });
+});
+
+function slideLeft(){
+    document.getElementById("slider").scrollBy({
+        left:-320,
+        behavior:"smooth"
+    });
+}
+
+function slideRight(){
+    document.getElementById("slider").scrollBy({
+        left:320,
+        behavior:"smooth"
+    });
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
@@ -450,7 +696,30 @@ window.onclick = function(e){
 emailjs.init("cvBjU-6tpyjsQ9rXD");
 </script>
 <script>
-document.addEventListener("contextmenu", function(e){
+document.addEventListener("visibilitychange", function() {
+    if(document.hidden){
+        document.body.style.filter = "blur(10px)";
+    } else {
+        document.body.style.filter = "none";
+    }
+});
+</script>
+<script>
+document.addEventListener("visibilitychange", function() {
+    if(document.hidden){
+        console.log("User switched tab (maybe screenshot)");
+    }
+});
+</script>
+<script>
+setInterval(function(){
+    if(window.outerWidth - window.innerWidth > 100){
+        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Access denied 🚫</h1>";
+    }
+},1000);
+</script>
+<script>
+document.addEventListener("dragstart", function(e){
     e.preventDefault();
 });
 </script>
@@ -480,33 +749,9 @@ document.addEventListener("keydown", function(e){
 });
 </script>
 <script>
-document.addEventListener("dragstart", function(e){
+document.addEventListener("contextmenu", function(e){
     e.preventDefault();
 });
 </script>
-<script>
-setInterval(function(){
-    if(window.outerWidth - window.innerWidth > 100){
-        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Access denied 🚫</h1>";
-    }
-},1000);
-</script>
-<script>
-document.addEventListener("visibilitychange", function() {
-    if(document.hidden){
-        console.log("User switched tab (maybe screenshot)");
-    }
-});
-</script>
-<script>
-document.addEventListener("visibilitychange", function() {
-    if(document.hidden){
-        document.body.style.filter = "blur(10px)";
-    } else {
-        document.body.style.filter = "none";
-    }
-});
-</script>
-
 </body>
 </html>
