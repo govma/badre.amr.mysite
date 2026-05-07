@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About My Life - Badre</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(270deg,#020617,#0f172a,#020617);
+    background-size:600% 600%;
+    animation:bgMove 10s infinite;
+    color:white;
+}
+
+@keyframes bgMove{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.hero h1{
+    font-size:50px;
+}
+
+.hero span{
+    color:#38bdf8;
+}
+
+/* SECTION */
+section{
+    padding:60px 20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:20px;
+    transition:0.4s;
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 0 25px rgba(56,189,248,0.4);
+}
+
+/* TIMELINE */
+.timeline{
+    border-left:2px solid #38bdf8;
+    margin-top:40px;
+    padding-left:20px;
+}
+
+.timeline-item{
+    margin-bottom:30px;
+    position:relative;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-11px;
+    top:5px;
+    width:15px;
+    height:15px;
+    background:#38bdf8;
+    border-radius:50%;
+}
+
+/* GALLERY */
+
+
+/* QUOTE */
+.quote{
+    text-align:center;
+    font-size:20px;
+    margin-top:50px;
+    opacity:0.8;
+}
+
+/* ANIMATION */
+.hidden{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+.hero h1{font-size:32px;}
+}
+#lang{
+    padding:8px;
+    border-radius:10px;
+    background:#1e293b;
+    color:white;
+    border:none;
+}
+
+
+.gallery {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+    width: 100%;
+    will-change: transform;
+}
+
+.gallery img {
+    width: 80%;
+    min-width: 85%;
+    height: 400px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.03);
+}
+.slider {
+    width: 100%;
+    overflow: hidden;
+}
+.gallery img {
+    border-radius: 12px;
+}
+.hero{
+    animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+body::after{
+    content:"";
+    position:fixed;
+    width:300px;
+    height:300px;
+    background:#38bdf8;
+    filter:blur(120px);
+    opacity:0.2;
+    top:20%;
+    left:10%;
+    z-index:-1;
+}
+.home-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+
+    padding:12px 25px;
+    border-radius:15px;
+
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    font-size:17px;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(56,189,248,0.3);
+
+    transition:0.4s;
+
+    box-shadow:0 0 15px rgba(56,189,248,0.15);
+
+    z-index:999;
+}
+
+/* Hover */
+.home-btn:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    color:#38bdf8;
+
+    box-shadow:
+    0 0 20px rgba(56,189,248,0.5),
+    0 0 40px rgba(56,189,248,0.3);
+}
+
+/* Shine animation */
+.home-btn::before{
+    content:"";
+    position:absolute;
+
+    top:0;
+    left:-1%;
+
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+
+    transition:0.7s;
+}
+
+.home-btn:hover::before{
+    left:100%;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+.home-btn{
+    top:15px;
+    right:15px;
+
+    padding:10px 18px;
+    font-size:15px;
+}
+
+}
+</style>
+</head>
+
+<body>
+<a href="index.html" class="home-btn">⌂ Accueil</a>
+<select id="lang" onchange="changeLang()">
+    <option value="en">🇬🇧 EN</option>
+    <option value="ar">🇲🇦 AR</option>
+     <option value="fr">🇫🇷 FR</option>
+    <option value="es">🇪🇸 ES</option>
+    <option value="de">🇩🇪 DE</option>
+    <option value="it">🇮🇹 IT</option>
+</select>
+
+<section class="hero">
+    <h1 data-key="title">More About My Life</h1>
+    <p data-key="subtitle">Not just a developer... a story, a journey 🚀</p>
+</section>
+
+<section class="hidden">
+    <h2 data-key="who">Who I Am</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3 data-key="worker_title">💪 Hard Worker</h3>
+            <p data-key="worker_desc">I worked in agriculture and different fields to build my future.
+
+</p>
+        </div>
+
+        <div class="card">
+            <h3 data-key="exp_title">🌱 Experience</h3>
+            <p data-key="exp_desc">Real experience in field work and dealing with people.
+
+</p>
+        </div>
+
+        <div class="card">
+            <h3 data-key="ambition_title">🔥 Ambition</h3>
+            <p data-key="ambition_desc">I want to succeed, create projects and build a strong life.
+
+</p>
+        </div>
+    </div>
+</section>
+
+<section class="hidden">
+    <h2 data-key="journey">My Journey</h2>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <h4></h4>
+            <p data-key="y2022">Work in Agriculture farm</p>
+        </div>
+
+        <div class="timeline-item">
+            <h4 data-key="today"></h4>
+            <p data-key="today_desc">Developer  💻</p>
+        </div>
+    </div>
+</section>
+
+<section class="hidden">
+    <h2 data-key="moments">Moments</h2>
+    <div class="slider">
+    <div class="gallery" id="gallery">
+        <img src="agricole.png">
+        <img src="agricole 1.png">
+        <img src="agricole 2.png">
+        <img src="agricole 3.png">
+        <img src="pc.jpeg">
+        <img src="pc 1.jpeg">
+</div>
+    </div>
+</section>
+
+<section class="hidden">
+    <div class="quote" data-key="quote">
+        "Success is not luck... it's work, patience and belief."
+    </div>
+</section>
+<div style="position:fixed;bottom:10px;right:10px;opacity:0.3;">
+    © Badre Amr
+</div>
+<div id="protect"></div>
+<script>
+let index = 0;
+
+function autoSlider() {
+
+    const gallery = document.getElementById("gallery");
+    const images = gallery.querySelectorAll("img");
+
+    index++;
+
+    if(index >= images.length){
+        index = 0;
+    }
+
+    // مزيان للموبايل + PC
+    gallery.style.transform = `translateX(-${index * 100}%)`;
+}
+
+setInterval(autoSlider, 3000);
+</script>
+<script>
+
+localStorage.setItem("lang", lang);
+const translations = {
+
+fr:{
+title:"Plus sur ma vie",
+subtitle:"Pas seulement développeur... une histoire, un parcours 🚀",
+who:"Qui suis-je",
+
+worker_title:"💪 Travailleur",
+worker_desc:"J’ai travaillé dans l’agriculture et plusieurs domaines pour construire mon avenir.",
+
+exp_title:"🌱 Expérience",
+exp_desc:"Expérience réelle dans les champs et avec les gens.",
+
+ambition_title:"🔥 Ambition",
+ambition_desc:"Je veux réussir, créer mes projets et construire une vie forte.",
+
+journey:"Mon parcours",
+moments:"Moments",
+
+y2022:"Travail dans une ferme agricole",
+
+today:"Aujourd’hui",
+today_desc:"Développeur 💻",
+
+quote:"Le succès n'est pas la chance... c'est le travail, la patience et la foi."
+},
+
+en:{
+title:"More About My Life",
+subtitle:"Not just a developer... a story, a journey 🚀",
+who:"Who I Am",
+
+worker_title:"💪 Hard Worker",
+worker_desc:"I worked in agriculture and different fields to build my future.",
+
+exp_title:"🌱 Experience",
+exp_desc:"Real experience in field work and dealing with people.",
+
+ambition_title:"🔥 Ambition",
+ambition_desc:"I want to succeed, create projects and build a strong life.",
+
+journey:"My Journey",
+moments:"Moments",
+
+y2022:"Work in Agriculture farm",
+y2023:"Lemon harvesting 🍋",
+y2024:"Agriculture + self development 🚀",
+
+today:"Today",
+today_desc:"Developer 💻",
+
+quote:"Success is not luck... it's work, patience and belief."
+},
+
+ar:{
+title:"المزيد عن حياتي",
+subtitle:"ليس فقط مطور... بل قصة وطموح 🚀",
+who:"من أنا",
+
+worker_title:"💪 مجتهد",
+worker_desc:"اشتغلت في الفلاحة ومجالات مختلفة لبناء مستقبلي.",
+
+exp_title:"🌱 خبرة",
+exp_desc:"تجربة حقيقية في العمل الميداني والتعامل مع الناس.",
+
+ambition_title:"🔥 طموح",
+ambition_desc:"أسعى للنجاح وبناء مشاريع وحياة قوية.",
+
+journey:"رحلتي",
+moments:"لحظات",
+
+y2022:"العمل في الزراعة في المزرعة",
+
+today:"اليوم",
+today_desc:"المطور 💻",
+
+quote:"النجاح ليس حظاً... بل عمل وصبر وإيمان."
+},
+
+es:{
+title:"Más sobre mi vida",
+subtitle:"No solo desarrollador... una historia y un camino 🚀",
+who:"Quién soy",
+
+worker_title:"💪 Trabajador",
+worker_desc:"Trabajé en agricultura y varios campos para construir mi futuro.",
+
+exp_title:"🌱 Experiencia",
+exp_desc:"Experiencia real en el campo y con personas.",
+
+ambition_title:"🔥 Ambición",
+ambition_desc:"Quiero tener éxito y construir una vida fuerte.",
+
+journey:"Mi camino",
+moments:"Momentos",
+
+y2022:"Trabajar en una granja agrícola",
+
+today:"Hoy",
+today_desc:"Desarrollador 💻",
+
+quote:"El éxito no es suerte... es trabajo, paciencia y fe."
+},
+
+de:{
+title:"Mehr über mein Leben",
+subtitle:"Nicht nur ein Entwickler... sondern eine Geschichte 🚀",
+who:"Wer ich bin",
+
+worker_title:"💪 Fleißig",
+worker_desc:"Ich habe in der Landwirtschaft und anderen Bereichen gearbeitet.",
+
+exp_title:"🌱 Erfahrung",
+exp_desc:"Echte Erfahrung im Feld und mit Menschen.",
+
+ambition_title:"🔥 Ehrgeiz",
+ambition_desc:"Ich möchte erfolgreich sein und mein Leben aufbauen.",
+
+journey:"Mein Weg",
+moments:"Momente",
+
+y2022:"Werk op een landbouwbedrijf",
+
+today:"Heute",
+today_desc:"Ontwikkelaar 💻",
+
+quote:"Erfolg ist kein Glück... sondern Arbeit, Geduld und Glaube."
+},
+
+it:{
+title:"Di più sulla mia vita",
+subtitle:"Non solo sviluppatore... ma una storia 🚀",
+who:"Chi sono",
+
+worker_title:"💪 Lavoratore",
+worker_desc:"Ho lavorato in agricoltura e in vari settori.",
+
+exp_title:"🌱 Esperienza",
+exp_desc:"Esperienza reale sul campo e con le persone.",
+
+ambition_title:"🔥 Ambizione",
+ambition_desc:"Voglio avere successo e costruire una vita forte.",
+
+journey:"Il mio percorso",
+moments:"Momenti",
+
+y2022:"Lavorare in una fattoria agricola",
+
+today:"Oggi",
+today_desc:"Sviluppatore 💻",
+
+quote:"Il successo non è fortuna... è lavoro, pazienza e fede."
+}
+
+};
+function changeLang(){
+    let lang = document.getElementById("lang").value;
+
+    document.querySelectorAll("[data-key]").forEach(el=>{
+        let key = el.getAttribute("data-key");
+
+        if(translations[lang][key]){
+            el.innerText = translations[lang][key];
+        }
+    });
+
+    // RTL للعربية
+    if(lang === "ar"){
+        document.body.style.direction = "rtl";
+    } else {
+        document.body.style.direction = "ltr";
+    }
+}
+
+// animation scroll
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+document.querySelectorAll('.hidden').forEach(el=>observer.observe(el));
+</script>
+<script>
+document.addEventListener("visibilitychange", function() {
+    if(document.hidden){
+        document.body.style.filter = "blur(10px)";
+    } else {
+        document.body.style.filter = "none";
+    }
+});
+</script>
+<script>
+document.addEventListener("visibilitychange", function() {
+    if(document.hidden){
+        console.log("User switched tab (maybe screenshot)");
+    }
+});
+</script>
+<script>
+setInterval(function(){
+    if(window.outerWidth - window.innerWidth > 100){
+        document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:50px;'>Access denied 🚫</h1>";
+    }
+},1000);
+</script>
+<script>
+document.addEventListener("dragstart", function(e){
+    e.preventDefault();
+});
+</script>
+<script>
+document.addEventListener("keydown", function(e){
+
+    // Ctrl + U (view source)
+    if(e.ctrlKey && e.key === "u"){
+        e.preventDefault();
+    }
+
+    // Ctrl + C (copy)
+    if(e.ctrlKey && e.key === "c"){
+        e.preventDefault();
+    }
+
+    // Ctrl + S (save)
+    if(e.ctrlKey && e.key === "s"){
+        e.preventDefault();
+    }
+
+    // Ctrl + Shift + I (inspect)
+    if(e.ctrlKey && e.shiftKey && e.key === "I"){
+        e.preventDefault();
+    }
+
+});
+</script>
+<script>
+document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+});
+</script>
+</body>
+</html>

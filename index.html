@@ -466,38 +466,139 @@ body{
         height:180px;
     }
 }
+#about{
+    text-align:center;
+    margin-top:40px;
+}
+
+#about a{
+    position:relative;
+    display:inline-block;
+    padding:18px 40px;
+    font-size:22px;
+    font-weight:600;
+    color:white;
+    text-decoration:none;
+    border-radius:15px;
+
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(56,189,248,0.4);
+
+    backdrop-filter:blur(10px);
+
+    transition:0.4s;
+    overflow:hidden;
+
+    box-shadow:0 0 15px rgba(56,189,248,0.2);
+}
+
+/* Hover */
+#about a:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    color:#38bdf8;
+
+    box-shadow:
+    0 0 20px rgba(56,189,248,0.5),
+    0 0 40px rgba(56,189,248,0.3);
+}
+
+/* light effect */
+#about a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    transition:0.7s;
+}
+
+#about a:hover::before{
+    left:100%;
+}
+#lang{
+    position:fixed;
+    top:10px;
+    right:20px;
+    z-index:999;
+}
+#lang{
+    padding:2px;
+    border-radius:7px;
+    background:#1e293b;
+    color:white;
+    border:none;
+}
+.cv-menu{
+    z-index:99999;
+}
 </style>
 </head>
 
 <body>
-
+<select id="lang" onchange="changeLang()">
+    <option value="fr">🇫🇷 FR</option>
+    <option value="en">🇬🇧 EN</option>
+    <option value="ar">🇲🇦 AR</option>
+    <option value="es">🇪🇸 ES</option>
+    <option value="de">🇩🇪 DE</option>
+    <option value="it">🇮🇹 IT</option>
+</select>
 <!-- STARS -->
 <div class="stars"></div>
 
 <nav>
     <h2>Badre</h2>
+
     <div>
-        <a href="#about">About</a>
-        <a href="#Services and Skills">Services and Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-        <div class="cv-dropdown">
+        <a href="#about" data-key="nav_about">About</a>
+
+        <a href="#Services and Skills" data-key="nav_services">
+            Services and Skills
+        </a>
+
+        <a href="#projects" data-key="nav_projects">
+            Projects
+        </a>
+
+        <a href="more.html" data-key="nav_more">
+            More about me
+        </a>
+
+        <a href="#contact" data-key="nav_contact">
+            Contact
+        </a>
+
+<div class="cv-dropdown">
     <button class="btn primary" onclick="toggleCV()">Download CV ⬇️</button>
 
     <div id="cvMenu" class="cv-menu">
-        <a href="cv-de.pdf" target="_blank">🇩🇪 Deutsch</a>
-        <a href="cv-en.pdf" target="_blank">🇬🇧 English</a>
-        <a href="cv-es.pdf" target="_blank">🇪🇸 Español</a>
         <a href="cv-fr.pdf" target="_blank">🇫🇷 Français</a>
+        <a href="cv-es.pdf" target="_blank">🇪🇸 Español</a>
+        <a href="cv-en.pdf" target="_blank">🇬🇧 English</a>
+        <a href="cv-de.pdf" target="_blank">🇩🇪 Deutsch</a>
     </div>
 </div>
-    </div>
 </nav>
-
 <section class="hero">
-    <img src="profile.jpeg" class="profile" draggable="false">
-    <h1 class="hidden">Hi, I'm <span id="typing"></span></h1>
-    <p class="hidden">Développeur Web Moderne</p>
+ <img src="profile.jpeg" class="profile" draggable="false">
+<h1 class="hidden">
+<span data-key="hero_title">Hi, I'm</span>
+<span id="typing"></span>
+</h1>
+
+<p class="hidden" data-key="hero_subtitle">
+Développeur Web Moderne
+</p>
 
     <div class="btns hidden">
 <button class="btn secondary" onclick="openLinked()">LinkedIn</button>
@@ -508,7 +609,7 @@ body{
     </div>
 </section>
 <section id="Services and Skills" class="hidden">
-<h2>Services and Skills</h2>
+<h2 data-key="services_title">Services and Skills</h2>
 <div class="skills">
 <div class="skill">HTML5</div>
 <div class="skill">Moderne CSS top</div>
@@ -525,13 +626,13 @@ body{
 </div>
 </section>
 <section id="about" class="hidden">
-    <h2>About Me</h2>
-    <p>Technicien spécialisé en développement informatique, passionné par le web et les nouvelles technologies.</p>
+<h2 data-key="about_title">About Me</h2>
+    <p data-key="about_desc">
+Technicien spécialisé en développement informatique, passionné par le web et les nouvelles technologies.</p>
 </section>
 
 <section id="projects" class="hidden">
-    <h2>Projects</h2>
-
+<h2 data-key="projects_title">Projects</h2>
     <div class="slider">
 
         <button class="arrow left" onclick="slideLeft()">❮</button>
@@ -594,6 +695,10 @@ body{
                 <img src="app3.jpeg">
             </div>
 
+            <div class="project">
+                <img src="gym.jpeg">
+            </div>
+
         </div>
 
         <button class="arrow right" onclick="slideRight()">❯</button>
@@ -601,9 +706,16 @@ body{
     </div>
 </section>
 
+<section id="about" class="hidden">
+<h2>
+<a href="more.html" data-key="more_btn">
+more about me
+</a>
+</h2>
+</section>
+
 <section id="contact" class="contact hidden">
-    <h2>Contact</h2>
-    
+<h2 data-key="contact_title">Contact</h2>    
     <input type="text" id="name" placeholder="Nom">
     <input type="email" id="email" placeholder="Email">
     <textarea id="message" placeholder="Message"></textarea>
@@ -717,6 +829,7 @@ function sendEmail(){
     });
 }
 
+
 function toggleCV(){
     const menu = document.getElementById("cvMenu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
@@ -728,6 +841,7 @@ window.onclick = function(e){
         document.getElementById("cvMenu").style.display = "none";
     }
 }
+
 
 document.querySelectorAll(".project").forEach(card=>{
     card.addEventListener("mousemove",(e)=>{
@@ -758,6 +872,187 @@ function slideRight(){
         behavior:"smooth"
     });
 }
+
+const translations = {
+    en:{
+
+nav_about:"About",
+nav_services:"Services and Skills",
+nav_projects:"Projects",
+nav_more:"More about me",
+nav_contact:"Contact",
+
+download_cv:"Download CV ⬇️",
+
+hero_title:"Hi, I'm",
+hero_subtitle:"Modern Web Developer",
+
+services_title:"Services and Skills",
+
+about_title:"About Me",
+about_desc:"Specialized technician in IT development, passionate about web and technology.",
+
+projects_title:"Projects",
+
+contact_title:"Contact",
+
+more_btn:"More about me"
+
+},
+fr:{
+
+nav_about:"À propos",
+nav_services:"Services et Compétences",
+nav_projects:"Projets",
+nav_more:"Plus sur moi",
+nav_contact:"Contact",
+
+download_cv:"Télécharger CV ⬇️",
+
+hero_title:"Salut, je suis",
+hero_subtitle:"Développeur Web Moderne",
+
+services_title:"Services et Compétences",
+
+about_title:"À propos de moi",
+about_desc:"Technicien spécialisé en développement informatique, passionné par le web et les nouvelles technologies.",
+
+projects_title:"Projets",
+
+contact_title:"Contact",
+
+more_btn:"Plus sur moi"
+
+},
+ar:{
+
+nav_about:"حول",
+nav_services:"الخدمات والمهارات",
+nav_projects:"المشاريع",
+nav_more:"المزيد عني",
+nav_contact:"تواصل",
+
+download_cv:"تحميل السيرة الذاتية ⬇️",
+
+hero_title:"مرحباً، أنا",
+hero_subtitle:"مطور ويب عصري",
+
+services_title:"الخدمات والمهارات",
+
+about_title:"نبذة عني",
+about_desc:"تقني متخصص في تطوير المعلوميات، شغوف بالويب والتكنولوجيا الحديثة.",
+
+projects_title:"المشاريع",
+
+contact_title:"تواصل",
+
+more_btn:"المزيد عني"
+
+},
+
+es:{
+
+nav_about:"Acerca de",
+nav_services:"Servicios y Habilidades",
+nav_projects:"Proyectos",
+nav_more:"Más sobre mí",
+nav_contact:"Contacto",
+
+download_cv:"Descargar CV ⬇️",
+
+hero_title:"Hola, soy",
+hero_subtitle:"Desarrollador Web Moderno",
+
+services_title:"Servicios y Habilidades",
+
+about_title:"Sobre mí",
+about_desc:"Técnico especializado en desarrollo informático, apasionado por la web y las nuevas tecnologías.",
+
+projects_title:"Proyectos",
+
+contact_title:"Contacto",
+
+more_btn:"Más sobre mí"
+
+},
+
+de:{
+
+nav_about:"Über mich",
+nav_services:"Dienstleistungen und Fähigkeiten",
+nav_projects:"Projekte",
+nav_more:"Mehr über mich",
+nav_contact:"Kontakt",
+
+download_cv:"Lebenslauf herunterladen ⬇️",
+
+hero_title:"Hallo, ich bin",
+hero_subtitle:"Moderner Webentwickler",
+
+services_title:"Dienstleistungen und Fähigkeiten",
+
+about_title:"Über mich",
+about_desc:"Spezialisierter Techniker für Informatikentwicklung mit Leidenschaft für Web und neue Technologien.",
+
+projects_title:"Projekte",
+
+contact_title:"Kontakt",
+
+more_btn:"Mehr über mich"
+
+},
+
+it:{
+
+nav_about:"Chi sono",
+nav_services:"Servizi e Competenze",
+nav_projects:"Progetti",
+nav_more:"Più su di me",
+nav_contact:"Contatto",
+
+download_cv:"Scarica CV ⬇️",
+
+hero_title:"Ciao, sono",
+hero_subtitle:"Sviluppatore Web Moderno",
+
+services_title:"Servizi e Competenze",
+
+about_title:"Su di me",
+about_desc:"Tecnico specializzato nello sviluppo informatico, appassionato di web e nuove tecnologie.",
+
+projects_title:"Progetti",
+
+contact_title:"Contatto",
+
+more_btn:"Più su di me"
+
+}
+};
+function changeLang() {
+
+    const lang = document.getElementById("lang").value;
+
+    document.querySelectorAll("[data-key]").forEach(el => {
+
+        const key = el.getAttribute("data-key");
+
+        if(translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+
+    });
+
+    // direction RTL للعربية
+    if(lang === "ar"){
+        document.body.style.direction = "rtl";
+        document.body.style.textAlign = "right";
+    } else {
+        document.body.style.direction = "ltr";
+        document.body.style.textAlign = "left";
+    }
+}
+
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
